@@ -10,21 +10,21 @@ For more information visit http://stackoverflow.com/questions/28593223/apache-po
 
 Here is how to recreate everything from scratch or part of it given the provided files:
 
-1. From ireport load the attached jrxml file which will output just my logo.
-2. Select from ireport the xlsx output type and you will get the report1.xlsx also attached.
-3. Now try to encrypt the file using the java program attached and you will get an error as shown below:
+* From ireport load the attached jrxml file which will output just my logo.
+* Select from ireport the xlsx output type and you will get the report1.xlsx also attached.
+* Now try to encrypt the file using the java program attached and you will get an error as shown below:
 ```
 $ javac -cp "" Enc.java $ java -cp ".:" Enc /home/dev/xlsxenc/report1.xlsx /tmp/out.xlsx
 
 Exception in thread "main" org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException: Fail to save: an error occurs while saving the package : part at org.apache.poi.openxml4j.opc.ZipPackage.saveImpl(ZipPackage.java:503) at org.apache.poi.openxml4j.opc.OPCPackage.save(OPCPackage.java:1425) at Enc.main(Enc.java:34) Caused by: java.lang.IllegalArgumentException: part at org.apache.poi.openxml4j.opc.OPCPackage.addPackagePart(OPCPackage.java:873) at org.apache.poi.openxml4j.opc.ZipPackage.saveImpl(ZipPackage.java:448) ... 2 more
 ```
-4. Now it is time for the workaround. Run the below command to "correct" the xlsx:
+* Now it is time for the workaround. Run the below command to "correct" the xlsx:
 ```
 $ libreoffice --headless --convert-to xlsx /home/dev/xlsxenc/report1.xlsx --outdir /tmp
 
 convert /home/dev/xlsxenc/report1.xlsx -> /tmp/report1.xlsx using Calc Office Open XML
 ```
-5. And confirm the program now encrypts the file. When you open it it will ask for password. Just type "password" and it will open.
+* And confirm the program now encrypts the file. When you open it it will ask for password. Just type "password" and it will open.
 ```
 $ java -cp ".:*" Enc /tmp/report1.xlsx /tmp/out.xlsx
 
